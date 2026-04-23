@@ -49,7 +49,7 @@
     .sticker:nth-child(3) { top: 50%; left: -20px; transform: translateY(-50%); animation-delay: 1s; }
     .sticker:nth-child(4) { top: 10px; left: 0px; animation-delay: 1.5s; }
     @keyframes wiggle { 0%, 100% { transform: rotate(-10deg) scale(1); } 50% { transform: rotate(10deg) scale(1.15); } }
- 
+
     .message-card { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); border: 2px solid #FFD6F0; border-radius: 2rem; padding: 2rem 2.5rem; margin: 2rem auto 0; max-width: 580px; position: relative; animation: fadeInUp 0.8s ease 0.6s both; box-shadow: 0 8px 40px #FF6DAE22; }
     .message-card::before { content: '❝'; position: absolute; top: -0.8rem; left: 1.5rem; font-size: 3rem; color: #FF6DAE; line-height: 1; font-family: Georgia, serif; }
     .message-text { font-size: 1.15rem; color: #5A3070; line-height: 1.8; font-weight: 600; }
@@ -81,10 +81,10 @@
   </style>
 </head>
 <body>
- 
+
 <div class="bg-hearts" id="bgHearts"></div>
-<audio id="music" loop src="Natanael Cano  Las Mañanitas.mp3" preload="auto"></audio>
- 
+<audio id="music" loop src="Natanael Cano Las Mañanitas.mp3" preload="auto"></audio>
+
 <div class="container">
   <div class="title-banner">
     <div class="title-small">✨ hoy es un día muy especial ✨</div>
@@ -92,7 +92,7 @@
     <div class="title-main">¡Feliz Cumpleaños</div>
     <div class="title-name">Frida!</div>
   </div>
- 
+
   <div class="photo-wrapper" id="photoWrapper">
     <div class="photo-ring"></div>
     <div class="photo-ring-inner"></div>
@@ -106,16 +106,16 @@
     <div class="sticker">⭐</div>
     <div class="sticker">🌸</div>
   </div>
- 
+
   <div class="slider-dots" id="sliderDots">
     <div class="dot active" onclick="goToSlide(0)"></div>
   </div>
   <div class="photo-counter" id="photoCounter"></div>
- 
- 
- 
+
+
+
   <div class="cake-section"><span class="cake-emoji">🎂</span></div>
- 
+
   <div class="message-card">
     <p class="message-text">
       Hoy el universo conspiró para traerte al mundo y gracias a eso mi vida tiene más color, más risas y más magia. 🌸<br><br>
@@ -124,7 +124,7 @@
     </p>
     <div class="message-signature">Con todo el cariño del mundo 💜</div>
   </div>
- 
+
   <div class="music-bar">
     <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
       <span class="music-note">🎵</span> Reproducir música
@@ -134,10 +134,10 @@
       <div class="bar"></div><div class="bar"></div>
     </div>
   </div>
- 
+
   <div class="footer-hearts">🌸 💜 🎀 💜 🌸</div>
 </div>
- 
+
 <script>
   // Corazones flotantes
   const emojis = ['🌸','💜','🎀','⭐','✨','💕','🦋','🌷'];
@@ -152,7 +152,7 @@
     el.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
     bg.appendChild(el);
   }
- 
+
   // Chispitas
   for (let i = 0; i < 15; i++) {
     const s = document.createElement('div');
@@ -161,7 +161,7 @@
     s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s;background:${['#FFB6D9','#C97BFF','#FF6DAE','#FFD6F0'][Math.floor(Math.random()*4)]};`;
     document.body.appendChild(s);
   }
- 
+
   // Confetti
   const colors = ['#FF6DAE','#C97BFF','#FFD6F0','#FFB6D9','#B6D9FF','#FFF3B0'];
   for (let i = 0; i < 40; i++) {
@@ -170,7 +170,7 @@
     c.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>0.5?'50%':'2px'};animation-duration:${4+Math.random()*6}s;animation-delay:${Math.random()*5}s;`;
     document.body.appendChild(c);
   }
- 
+
   // =============================================
   // AQUI VAN TUS FOTOS
   // Cambia .jpg por .png o .jpeg si es necesario
@@ -182,13 +182,14 @@
     'f4.jpg',
     'f5.jpg',
     'f6.jpg',
+    'f7.jpg',
   ];
   // =============================================
- 
+
   let slides = [];
   let current = 0;
   let autoTimer = null;
- 
+
   function buildSlider(srcs) {
     const slider = document.getElementById('photoSlider');
     const dotsEl = document.getElementById('sliderDots');
@@ -210,19 +211,19 @@
     clearInterval(autoTimer);
     if (srcs.length > 1) autoTimer = setInterval(() => goToSlide((current + 1) % srcs.length), 3000);
   }
- 
+
   function goToSlide(n) {
     document.querySelectorAll('.slide').forEach((s,i) => s.classList.toggle('active', i === n));
     document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === n));
     current = n;
     updateCounter();
   }
- 
+
   function updateCounter() {
     const el = document.getElementById('photoCounter');
     el.textContent = slides.length > 1 ? `${current + 1} / ${slides.length}` : '';
   }
- 
+
   function loadPhotos(e) {
     const files = Array.from(e.target.files);
     if (!files.length) return;
@@ -234,13 +235,13 @@
       reader.readAsDataURL(file);
     });
   }
- 
+
   buildSlider(fotosDefault);
- 
+
   // Música
   const audio = document.getElementById('music');
   let playing = false;
- 
+
   // Autoplay: los navegadores bloquean audio sin interacción del usuario.
   // Al primer toque/clic en cualquier parte de la página, arranca la música.
   function startMusic() {
@@ -251,10 +252,10 @@
       document.querySelectorAll('.bar').forEach(b => b.classList.add('playing'));
     }).catch(() => {});
   }
- 
+
   document.addEventListener('click', startMusic, { once: true });
   document.addEventListener('touchstart', startMusic, { once: true });
- 
+
   // Intentar autoplay inmediato (funciona si el navegador lo permite)
   audio.play().then(() => {
     playing = true;
@@ -263,11 +264,11 @@
   }).catch(() => {
     // Si el navegador lo bloquea, arrancará al primer toque
   });
- 
+
   audio.addEventListener('error', () => {
     document.getElementById('musicBtn').innerHTML = '<span class="music-note">⚠️</span> No se encontró el MP3';
   });
- 
+
   function toggleMusic() {
     const btn = document.getElementById('musicBtn');
     const bars = document.querySelectorAll('.bar');
